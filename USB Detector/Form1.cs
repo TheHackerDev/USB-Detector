@@ -17,8 +17,6 @@ namespace USB_Detector
         private const int DBT_DEVICEARRIVAL = 0x8000;
         private const int DBT_DEVICEREMOVALCOMPLETE = 0x8004;
         private const int WM_DEVICECHANGE = 0x0219;
-
-        // Device-specific information
         
 
         // For getting device information
@@ -52,7 +50,7 @@ namespace USB_Detector
                         txt_output.Text = "Device inserted. ";
                         txt_output.Text += "Drive letter: " + DriveMaskToLetter(vol.dbcv_unitmask);
                         // TODO: Get more device information
-                    }
+                        }
                     else if (m.WParam.ToInt32() == DBT_DEVICEREMOVALCOMPLETE)
                     {
                         txt_output.Text = "Device removed.";
@@ -70,18 +68,19 @@ namespace USB_Detector
         }
 
         // For determining where the drive was plugged in.
-        private static char DriveMaskToLetter(int mask)
+        private static char DriveMaskToLetter(int logicalUnitMask)
         {
             char letter;
             string drives = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; //1 = A, 2 = B, 3 = C
-            int cnt = 0;
-            int pom = mask / 2;
-            while (pom != 0)    // while there is any bit set in the mask shift it right      
+            int count = 0;
+            int tmpMask = logicalUnitMask / 2;
+            // while there is any bit set in the mask shift it right
+            while (tmpMask != 0)      
             {
-                pom = pom / 2;
-                cnt++;
+                tmpMask = tmpMask / 2;
+                count++;
             }
-            letter = cnt < drives.Length ? drives[cnt] : '?';
+            letter = count < drives.Length ? drives[count] : '?';
             return letter;
         }
     }
