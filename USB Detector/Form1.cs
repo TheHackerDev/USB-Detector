@@ -147,9 +147,9 @@ namespace USB_Detector
 
                 return device;
             }
-            catch (Exception e)
+            catch (IOException ioException)
             {
-                // Sometimes the device is not ready, or cannot be enumerated in this fashion
+                // Empty drive
                 DeviceInfo device = new DeviceInfo();
                 return device;
             }
