@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace USB_Detector
 {
-    public partial class Form1 : Form
+    public partial class Main : Form
     {
         // For detecting device insertion and removal.
         private const int DBT_DEVICEARRIVAL = 0x8000;
@@ -47,7 +47,7 @@ namespace USB_Detector
             }
         }
 
-        public Form1()
+        public Main()
         {
             InitializeComponent();
             
