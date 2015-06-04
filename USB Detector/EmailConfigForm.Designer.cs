@@ -1,6 +1,6 @@
 ﻿namespace USB_Detector
 {
-    partial class EmailConfig
+    partial class EmailConfigForm
     {
         /// <summary>
         /// Required designer variable.
@@ -129,6 +129,7 @@
             this.btnAccept.TabIndex = 10;
             this.btnAccept.Text = "Accept";
             this.btnAccept.UseVisualStyleBackColor = true;
+            this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
             // 
             // EmailConfig
             // 
