@@ -14,6 +14,12 @@ namespace USB_Detector
 {
     public partial class Main : Form
     {
+        // Ready the other windows
+        public EmailConfigForm emailConfigForm = new EmailConfigForm();
+
+        // Instantiate the class to hold email configuration data
+        EmailConfig emailConfig = new EmailConfig();
+
         // For detecting device insertion and removal.
         private const int DBT_DEVICEARRIVAL = 0x8000;
         private const int DBT_DEVICEREMOVALCOMPLETE = 0x8004;
@@ -53,6 +59,16 @@ namespace USB_Detector
             
             // Get the existing drive information
             EnumDrives();
+
+            // Set a reference to this form
+            emailConfigForm.MainForm = this;
+
+            // Check whether an email configuration already exists
+            if (!emailConfig.HasConfigFile())
+            {
+                // Open the email configuration window right away
+                emailConfigForm.ShowDialog();
+            }
         }
 
         // Overriding the base method in order to handle the WM_DEVICECHANGE event

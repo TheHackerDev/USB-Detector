@@ -12,6 +12,9 @@ namespace USB_Detector
 {
     public partial class EmailConfigForm : Form
     {
+        // Reference to the main form
+        public Form MainForm = new Form();
+
         public EmailConfigForm()
         {
             InitializeComponent();
@@ -19,7 +22,11 @@ namespace USB_Detector
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-
+            // Load the values into the email configuration instance
+            // TODO
+            
+            // Switch back to the main window
+            this.Close();
         }
     }
 }

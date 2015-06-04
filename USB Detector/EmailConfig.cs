@@ -20,5 +20,14 @@ namespace USB_Detector
             this.EmailSubject = "Alert from USB Detector";
             this.SmtpPort = 25;
         }
+
+        // Checks for a config file. If it exists, it loads the values
+        // into the class and returns true.
+        public bool HasConfigFile()
+        {
+            // TODO write configuration file checker function
+
+            return false;
+        }
     }
 }
