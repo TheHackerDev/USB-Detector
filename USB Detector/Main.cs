@@ -173,6 +173,18 @@ namespace USB_Detector
                 devices.Add(driveLetter, GetDeviceInfo(driveLetter));
             }
         }
+
+        // Called from the menu item
+        private void ExitProgram(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        // Called when the form is closed from "X" window button
+        private void ExitProgram(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
 
