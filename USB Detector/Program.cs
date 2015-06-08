@@ -19,13 +19,14 @@ namespace USB_Detector
         [STAThread]
         static void Main()
         {
-            // Prepare the forms
-            FormMain = new Main();
-            FormEmailConfig = new EmailConfigForm();
-            EmailConfiguration = new EmailConfig();
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            // Prepare the forms
+            FormEmailConfig = new EmailConfigForm();
+            EmailConfiguration = new EmailConfig();
+            FormMain = new Main();
+
             Application.Run(FormMain);
         }
     }
