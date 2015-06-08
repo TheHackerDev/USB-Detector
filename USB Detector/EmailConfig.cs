@@ -25,9 +25,14 @@ namespace USB_Detector
         // into the class and returns true.
         public bool HasConfigFile()
         {
-            // TODO write configuration file checker function
+            // TODO: Implement configuration file saving and fetching
 
             return false;
+        }
+
+        public void WriteToConfigFile()
+        {
+            // TODO: on method invoking, write the properties to the configuration file
         }
     }
 }

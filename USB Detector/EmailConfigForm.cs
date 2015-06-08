@@ -12,9 +12,6 @@ namespace USB_Detector
 {
     public partial class EmailConfigForm : Form
     {
-        // Reference to the main form
-        public Form MainForm = new Form();
-
         public EmailConfigForm()
         {
             InitializeComponent();
@@ -22,11 +19,29 @@ namespace USB_Detector
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
+            // Temporary value for the smtp port parser
+            int smtpPort;
+
             // Load the values into the email configuration instance
-            // TODO
-            
+            Program.EmailConfiguration.EmailFrom = txtEmailFrom.Text;
+            Program.EmailConfiguration.EmailTo = txtEmailTo.Text;
+            if (!txtEmailSubject.Text.Equals(""))
+            {
+                Program.EmailConfiguration.EmailSubject = txtEmailSubject.Text;
+            }
+            if (Int32.TryParse(txtSmtpPort.Text,out smtpPort))
+            {
+                Program.EmailConfiguration.SmtpPort = smtpPort;
+            }
+            Program.EmailConfiguration.SmtpServer = txtSmtpServer.Text;
+
+            // Write the configuration to the configuration file
+            Program.EmailConfiguration.WriteToConfigFile();
+
             // Switch back to the main window
             this.Close();
         }
     }
 }
+
+// TODO: Add validation with error fields to the input fields (validate on focus leave)
