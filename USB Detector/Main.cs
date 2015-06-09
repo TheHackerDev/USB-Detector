@@ -185,7 +185,11 @@ namespace USB_Detector
         {
             Application.Exit();
         }
+
+        // Called when the "Settings" menu item is clicked
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Program.FormEmailConfig.ShowDialog();
+        }
     }
 }
-
-// TODO: Add menu item for email settings and showDialog the EmailConfigForm when clicked
