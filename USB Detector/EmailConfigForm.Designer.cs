@@ -47,6 +47,7 @@
             this.txtSmtpServer.Name = "txtSmtpServer";
             this.txtSmtpServer.Size = new System.Drawing.Size(150, 20);
             this.txtSmtpServer.TabIndex = 0;
+            this.txtSmtpServer.Leave += new System.EventHandler(this.Validate_txtSmtpServer);
             // 
             // lblSmtpServer
             // 
@@ -131,7 +132,7 @@
             this.btnAccept.UseVisualStyleBackColor = true;
             this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
             // 
-            // EmailConfig
+            // EmailConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -150,7 +151,7 @@
             this.Controls.Add(this.txtSmtpServer);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "EmailConfig";
+            this.Name = "EmailConfigForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Email Configuration";
             this.ResumeLayout(false);

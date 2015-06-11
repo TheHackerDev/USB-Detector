@@ -16,16 +16,23 @@ namespace USB_Detector
 
         public EmailConfig()
         {
-            // sets helpful defaults
-            this.EmailSubject = "Alert from USB Detector";
-            this.SmtpPort = 25;
+            if (HasValidConfigFile())
+            {
+                // TODO: Load in config file to the class
+            }
+            else
+            {
+                // sets helpful defaults
+                this.EmailSubject = "Alert from USB Detector";
+                this.SmtpPort = 25;
+            }
         }
 
-        // Checks for a config file. If it exists, it loads the values
-        // into the class and returns true.
-        public bool HasConfigFile()
+        // Checks for a config file.
+        public bool HasValidConfigFile()
         {
             // TODO: Implement configuration file saving and fetching
+            // TODO: Implement validation on the configuration file values, don't load in values if it does not validate
 
             return false;
         }
@@ -36,3 +43,4 @@ namespace USB_Detector
         }
     }
 }
+

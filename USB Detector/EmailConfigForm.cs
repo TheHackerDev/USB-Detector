@@ -12,6 +12,8 @@ namespace USB_Detector
 {
     public partial class EmailConfigForm : Form
     {
+        private bool IsValid = false;
+
         public EmailConfigForm()
         {
             InitializeComponent();
@@ -41,7 +43,25 @@ namespace USB_Detector
             // Switch back to the main window
             this.Close();
         }
+
+        private void Validate_txtSmtpServer(object sender, EventArgs e)
+        {
+            string input = e.ToString();
+
+            if (!Program.ConfigValidator.IsValid_TextLength(input))
+            {
+                IsValid = false;
+            }
+            else if (!Program.ConfigValidator.IsValid_NotEmpty(input))
+            {
+                IsValid = false;
+            }
+        }
     }
 }
 
-// TODO: Add validation with error fields to the input fields (validate on focus leave)
+/* TODO: Add validation with error fields to the input fields (validate on focus leave)
+ *      Text length
+ *      Not empty (unless optional)
+ *      Valid port (range and is number)
+ */

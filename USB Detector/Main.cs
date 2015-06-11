@@ -55,7 +55,7 @@ namespace USB_Detector
             EnumDrives();
 
             // Check whether an email configuration already exists
-            if (!Program.EmailConfiguration.HasConfigFile())
+            if (!Program.EmailConfiguration.HasValidConfigFile())
             {
                 // Open the email configuration window right away
                 Program.FormEmailConfig.ShowDialog();
@@ -69,7 +69,13 @@ namespace USB_Detector
             {
                 if (m.Msg == WM_DEVICECHANGE)
                 {
+                    String message;
+
                     DEV_BROADCAST_VOLUME vol = (DEV_BROADCAST_VOLUME)Marshal.PtrToStructure(m.LParam, typeof(DEV_BROADCAST_VOLUME));
+
+                    // TODO: Change output format to screen (grid?)
+                    // TODO: Send email with information on connect AND disconnect
+                    // TODO: Add more data to the messages (computer hostname, IP, etc
 
                     // The WParam value identifies what is occurring.
                     if (m.WParam.ToInt32() == DBT_DEVICEARRIVAL)
@@ -88,6 +94,15 @@ namespace USB_Detector
                             txt_output.Text += "\nDrive format: " + device.DriveFormat;
                             txt_output.Text += "\nDrive label: " + device.DriveLabel;
                             txt_output.Text += "\nDrive size (bytes): " + device.DriveSize;
+
+                            // Email the device data
+                            message = String.Format("Device Inserted on {0}.", DateTime.Now);
+                            message += String.Format("\nDrive letter: {0}", driveLetter);
+                            message += String.Format("\nDrive format: {0}", device.DriveFormat);
+                            message += String.Format("\nDrive label: {0}", device.DriveLabel);
+                            message += String.Format("\nDrive size (bytes): {0}", device.DriveSize);
+
+                            Program.Emailer.SendMail(message);
                         }
                     }
                     else if (m.WParam.ToInt32() == DBT_DEVICEREMOVALCOMPLETE)
@@ -107,6 +122,15 @@ namespace USB_Detector
                             txt_output.Text += "\nDrive format: " + device.DriveFormat;
                             txt_output.Text += "\nDrive label: " + device.DriveLabel;
                             txt_output.Text += "\nDrive size (bytes): " + device.DriveSize;
+
+                            // Email the device data
+                            message = String.Format("Device Inserted on {0}.", DateTime.Now);
+                            message += String.Format("\nDrive letter: {0}", driveLetter);
+                            message += String.Format("\nDrive format: {0}", device.DriveFormat);
+                            message += String.Format("\nDrive label: {0}", device.DriveLabel);
+                            message += String.Format("\nDrive size (bytes): {0}", device.DriveSize);
+
+                            Program.Emailer.SendMail(message);
 
                             // Remove drive from mapping
                             devices.Remove(driveLetter);

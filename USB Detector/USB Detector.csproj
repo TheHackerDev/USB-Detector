@@ -51,6 +51,8 @@
     <Compile Include="EmailConfigForm.Designer.cs">
       <DependentUpon>EmailConfigForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="EmailConfigValidator.cs" />
+    <Compile Include="Mailer.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
