@@ -39,6 +39,8 @@
             this.lblEmailSubject = new System.Windows.Forms.Label();
             this.txtEmailSubject = new System.Windows.Forms.TextBox();
             this.btnAccept = new System.Windows.Forms.Button();
+            this.lblSmtpPasswd = new System.Windows.Forms.Label();
+            this.txtSmtpPasswd = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // txtSmtpServer
@@ -73,11 +75,12 @@
             this.txtSmtpPort.Name = "txtSmtpPort";
             this.txtSmtpPort.Size = new System.Drawing.Size(150, 20);
             this.txtSmtpPort.TabIndex = 2;
+            this.txtSmtpPort.TextChanged += new System.EventHandler(this.txtSmtpPort_TextChanged);
             // 
             // lblEmailFrom
             // 
             this.lblEmailFrom.AutoSize = true;
-            this.lblEmailFrom.Location = new System.Drawing.Point(78, 93);
+            this.lblEmailFrom.Location = new System.Drawing.Point(78, 120);
             this.lblEmailFrom.Name = "lblEmailFrom";
             this.lblEmailFrom.Size = new System.Drawing.Size(61, 13);
             this.lblEmailFrom.TabIndex = 7;
@@ -85,15 +88,16 @@
             // 
             // txtEmailFrom
             // 
-            this.txtEmailFrom.Location = new System.Drawing.Point(145, 90);
+            this.txtEmailFrom.Location = new System.Drawing.Point(145, 117);
             this.txtEmailFrom.Name = "txtEmailFrom";
             this.txtEmailFrom.Size = new System.Drawing.Size(150, 20);
             this.txtEmailFrom.TabIndex = 6;
+            this.txtEmailFrom.TextChanged += new System.EventHandler(this.txtEmailFrom_TextChanged);
             // 
             // lblEmailTo
             // 
             this.lblEmailTo.AutoSize = true;
-            this.lblEmailTo.Location = new System.Drawing.Point(88, 67);
+            this.lblEmailTo.Location = new System.Drawing.Point(88, 94);
             this.lblEmailTo.Name = "lblEmailTo";
             this.lblEmailTo.Size = new System.Drawing.Size(51, 13);
             this.lblEmailTo.TabIndex = 5;
@@ -101,15 +105,16 @@
             // 
             // txtEmailTo
             // 
-            this.txtEmailTo.Location = new System.Drawing.Point(145, 64);
+            this.txtEmailTo.Location = new System.Drawing.Point(145, 91);
             this.txtEmailTo.Name = "txtEmailTo";
             this.txtEmailTo.Size = new System.Drawing.Size(150, 20);
             this.txtEmailTo.TabIndex = 4;
+            this.txtEmailTo.TextChanged += new System.EventHandler(this.txtEmailTo_TextChanged);
             // 
             // lblEmailSubject
             // 
             this.lblEmailSubject.AutoSize = true;
-            this.lblEmailSubject.Location = new System.Drawing.Point(19, 119);
+            this.lblEmailSubject.Location = new System.Drawing.Point(19, 146);
             this.lblEmailSubject.Name = "lblEmailSubject";
             this.lblEmailSubject.Size = new System.Drawing.Size(120, 13);
             this.lblEmailSubject.TabIndex = 9;
@@ -117,14 +122,15 @@
             // 
             // txtEmailSubject
             // 
-            this.txtEmailSubject.Location = new System.Drawing.Point(145, 116);
+            this.txtEmailSubject.Location = new System.Drawing.Point(145, 143);
             this.txtEmailSubject.Name = "txtEmailSubject";
             this.txtEmailSubject.Size = new System.Drawing.Size(150, 20);
             this.txtEmailSubject.TabIndex = 8;
+            this.txtEmailSubject.TextChanged += new System.EventHandler(this.txtEmailSubject_TextChanged);
             // 
             // btnAccept
             // 
-            this.btnAccept.Location = new System.Drawing.Point(130, 143);
+            this.btnAccept.Location = new System.Drawing.Point(130, 170);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(75, 23);
             this.btnAccept.TabIndex = 10;
@@ -132,12 +138,31 @@
             this.btnAccept.UseVisualStyleBackColor = true;
             this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
             // 
+            // lblSmtpPasswd
+            // 
+            this.lblSmtpPasswd.AutoSize = true;
+            this.lblSmtpPasswd.Location = new System.Drawing.Point(50, 67);
+            this.lblSmtpPasswd.Name = "lblSmtpPasswd";
+            this.lblSmtpPasswd.Size = new System.Drawing.Size(89, 13);
+            this.lblSmtpPasswd.TabIndex = 12;
+            this.lblSmtpPasswd.Text = "SMTP Password:";
+            // 
+            // txtSmtpPasswd
+            // 
+            this.txtSmtpPasswd.Location = new System.Drawing.Point(145, 64);
+            this.txtSmtpPasswd.Name = "txtSmtpPasswd";
+            this.txtSmtpPasswd.Size = new System.Drawing.Size(150, 20);
+            this.txtSmtpPasswd.TabIndex = 11;
+            this.txtSmtpPasswd.TextChanged += new System.EventHandler(this.txtSmtpPasswd_TextChanged);
+            // 
             // EmailConfigForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(324, 178);
+            this.ClientSize = new System.Drawing.Size(324, 201);
             this.ControlBox = false;
+            this.Controls.Add(this.lblSmtpPasswd);
+            this.Controls.Add(this.txtSmtpPasswd);
             this.Controls.Add(this.btnAccept);
             this.Controls.Add(this.lblEmailSubject);
             this.Controls.Add(this.txtEmailSubject);
@@ -172,5 +197,7 @@
         private System.Windows.Forms.Label lblEmailSubject;
         private System.Windows.Forms.TextBox txtEmailSubject;
         private System.Windows.Forms.Button btnAccept;
+        private System.Windows.Forms.Label lblSmtpPasswd;
+        private System.Windows.Forms.TextBox txtSmtpPasswd;
     }
 }

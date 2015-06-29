@@ -57,6 +57,31 @@ namespace USB_Detector
                 IsValid = false;
             }
         }
+
+        private void txtEmailSubject_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtEmailFrom_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtEmailTo_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtSmtpPort_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtSmtpPasswd_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

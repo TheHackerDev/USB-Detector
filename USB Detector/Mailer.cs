@@ -38,4 +38,5 @@ namespace USB_Detector
     }
 }
 
+// TODO: Send email with password (refer to http://stackoverflow.com/questions/9201239/send-e-mail-via-smtp-using-c-sharp#answer-9456611)
 // TODO: If internet not available, save in queue on local device
