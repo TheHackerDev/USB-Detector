@@ -75,7 +75,7 @@ namespace USB_Detector
 
                     // TODO: Change output format to screen (grid?)
                     // TODO: Send email with information on connect AND disconnect
-                    // TODO: Add more data to the messages (computer hostname, IP, etc
+                    // TODO: Add more data to the messages (computer hostname, IP, etc.)
 
                     // The WParam value identifies what is occurring.
                     if (m.WParam.ToInt32() == DBT_DEVICEARRIVAL)
@@ -96,7 +96,7 @@ namespace USB_Detector
                             txt_output.Text += "\nDrive size (bytes): " + device.DriveSize;
 
                             // Email the device data
-                            message = String.Format("Device Inserted on {0}.", DateTime.Now);
+                            message = String.Format("Device inserted on {0}.", DateTime.Now);
                             message += String.Format("\nDrive letter: {0}", driveLetter);
                             message += String.Format("\nDrive format: {0}", device.DriveFormat);
                             message += String.Format("\nDrive label: {0}", device.DriveLabel);
@@ -124,7 +124,7 @@ namespace USB_Detector
                             txt_output.Text += "\nDrive size (bytes): " + device.DriveSize;
 
                             // Email the device data
-                            message = String.Format("Device Inserted on {0}.", DateTime.Now);
+                            message = String.Format("Device removed on {0}.", DateTime.Now);
                             message += String.Format("\nDrive letter: {0}", driveLetter);
                             message += String.Format("\nDrive format: {0}", device.DriveFormat);
                             message += String.Format("\nDrive label: {0}", device.DriveLabel);
