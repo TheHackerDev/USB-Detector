@@ -12,8 +12,6 @@ namespace USB_Detector
 {
     public partial class EmailConfigForm : Form
     {
-        private bool IsValid = false;
-
         public EmailConfigForm()
         {
             InitializeComponent();
@@ -21,71 +19,98 @@ namespace USB_Detector
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            // Temporary value for the smtp port parser
-            int smtpPort;
-
-            // Load the values into the email configuration instance
-            // Email info
-            Program.EmailConfiguration.EmailFrom = txtEmailFrom.Text;
-            Program.EmailConfiguration.EmailTo = txtEmailTo.Text;
-            if (!txtEmailSubject.Text.Equals(""))
+            EmailConfigFormValidation validationInfo = Validation();
+            
+            if (validationInfo.isValid)
             {
-                Program.EmailConfiguration.EmailSubject = txtEmailSubject.Text;
+                // Temporary value for the smtp port parser
+                int smtpPort;
+
+                // Load the values into the email configuration instance
+                // Email info
+                Program.EmailConfiguration.EmailFrom = txtEmailFrom.Text;
+                Program.EmailConfiguration.EmailTo = txtEmailTo.Text;
+                if (string.IsNullOrWhiteSpace(txtEmailSubject.Text))
+                {
+                    Program.EmailConfiguration.EmailSubject = txtEmailSubject.Text;
+                }
+                // SMTP info
+                if (Int32.TryParse(txtSmtpPort.Text, out smtpPort))
+                {
+                    Program.EmailConfiguration.SmtpPort = smtpPort;
+                }
+                Program.EmailConfiguration.SmtpServer = txtSmtpServer.Text;
+                Program.EmailConfiguration.SmtpUsername = txtSmtpUser.Text;
+                Program.EmailConfiguration.SmtpPassword = txtSmtpPasswd.Text;
+                Program.EmailConfiguration.SmtpSsl = chkSslEnabled.Checked;
+
+                // Write the configuration to the configuration file
+                Program.EmailConfiguration.WriteToConfigFile();
+
+                // Switch back to the main window
+                this.Close();
             }
-            // SMTP info
-            if (Int32.TryParse(txtSmtpPort.Text,out smtpPort))
+            else
             {
-                Program.EmailConfiguration.SmtpPort = smtpPort;
-            }
-            Program.EmailConfiguration.SmtpServer = txtSmtpServer.Text;
-            Program.EmailConfiguration.SmtpUsername = txtSmtpUser.Text;
-            Program.EmailConfiguration.SmtpPassword = txtSmtpPasswd.Text;
-            Program.EmailConfiguration.SmtpSsl = chkSslEnabled.Checked;
-
-            // Write the configuration to the configuration file
-            Program.EmailConfiguration.WriteToConfigFile();
-
-            // Switch back to the main window
-            this.Close();
-        }
-
-        private void Validate_txtSmtpServer(object sender, EventArgs e)
-        {
-            string input = e.ToString();
-
-            if (!Program.ConfigValidator.IsValid_TextLength(input))
-            {
-                IsValid = false;
-            }
-            else if (!Program.ConfigValidator.IsValid_NotEmpty(input))
-            {
-                IsValid = false;
+                String errors = String.Concat(validationInfo.errors);
+                MessageBox.Show(errors, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void txtEmailSubject_TextChanged(object sender, EventArgs e)
+        // Validates input fields
+        private EmailConfigFormValidation Validation()
         {
+            bool valid = true; // assume it is valid
+            List<string> errors = new List<string>();
 
+            #region Empty Text
+            if (string.IsNullOrWhiteSpace(txtSmtpServer.Text))
+            {
+                valid = false;
+                errors.Add("SMTP Server cannot be blank.\r\n");
+            }
+            if (string.IsNullOrWhiteSpace(txtSmtpPort.Text))
+            {
+                valid = false;
+                errors.Add("SMTP Port cannot be blank.\r\n");
+            }
+            if (string.IsNullOrWhiteSpace(txtSmtpUser.Text))
+            {
+                valid = false;
+                errors.Add("SMTP Username cannot be blank.\r\n");
+            }
+            if (string.IsNullOrWhiteSpace(txtSmtpPasswd.Text))
+            {
+                valid = false;
+                errors.Add("SMTP Password cannot be blank.\r\n");
+            }
+            if (string.IsNullOrWhiteSpace(txtEmailTo.Text))
+            {
+                valid = false;
+                errors.Add("Email To address cannot be blank.\r\n");
+            }
+            if (string.IsNullOrWhiteSpace(txtEmailFrom.Text))
+            {
+                valid = false;
+                errors.Add("Email From address cannot be blank.\r\n");
+            }
+            #endregion
+            
+            // Return validation information
+            return new EmailConfigFormValidation(valid, errors);
         }
 
-        private void txtEmailFrom_TextChanged(object sender, EventArgs e)
+        // Structure to hold validation information
+        private struct EmailConfigFormValidation
         {
+            public bool isValid;
+            public List<string> errors;
 
-        }
-
-        private void txtEmailTo_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtSmtpPort_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtSmtpPasswd_TextChanged(object sender, EventArgs e)
-        {
-
+            public EmailConfigFormValidation(bool isValid, List<string> errors)
+            {
+                this.isValid = isValid;
+                this.errors = errors;
+            }
         }
     }
 }

@@ -73,10 +73,6 @@ namespace USB_Detector
 
                     DEV_BROADCAST_VOLUME vol = (DEV_BROADCAST_VOLUME)Marshal.PtrToStructure(m.LParam, typeof(DEV_BROADCAST_VOLUME));
 
-                    // TODO: Change output format to screen (grid?)
-                    // TODO: Send email with information on connect AND disconnect
-                    // TODO: Add more data to the messages (computer hostname, IP, etc.)
-
                     // The WParam value identifies what is occurring.
                     if (m.WParam.ToInt32() == DBT_DEVICEARRIVAL)
                     {

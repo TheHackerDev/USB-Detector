@@ -42,11 +42,11 @@
             this.lblSmtpUser = new System.Windows.Forms.Label();
             this.txtSmtpUser = new System.Windows.Forms.TextBox();
             this.grpSmtpInfo = new System.Windows.Forms.GroupBox();
-            this.grpEmailInfo = new System.Windows.Forms.GroupBox();
+            this.chkSslEnabled = new System.Windows.Forms.CheckBox();
+            this.lblSslEnabled = new System.Windows.Forms.Label();
             this.txtSmtpPasswd = new System.Windows.Forms.TextBox();
             this.lblSmtpPasswd = new System.Windows.Forms.Label();
-            this.lblSslEnabled = new System.Windows.Forms.Label();
-            this.chkSslEnabled = new System.Windows.Forms.CheckBox();
+            this.grpEmailInfo = new System.Windows.Forms.GroupBox();
             this.grpSmtpInfo.SuspendLayout();
             this.grpEmailInfo.SuspendLayout();
             this.SuspendLayout();
@@ -57,7 +57,6 @@
             this.txtSmtpServer.Name = "txtSmtpServer";
             this.txtSmtpServer.Size = new System.Drawing.Size(150, 20);
             this.txtSmtpServer.TabIndex = 0;
-            this.txtSmtpServer.Leave += new System.EventHandler(this.Validate_txtSmtpServer);
             // 
             // lblSmtpServer
             // 
@@ -83,7 +82,6 @@
             this.txtSmtpPort.Name = "txtSmtpPort";
             this.txtSmtpPort.Size = new System.Drawing.Size(150, 20);
             this.txtSmtpPort.TabIndex = 1;
-            this.txtSmtpPort.TextChanged += new System.EventHandler(this.txtSmtpPort_TextChanged);
             // 
             // lblEmailFrom
             // 
@@ -100,7 +98,6 @@
             this.txtEmailFrom.Name = "txtEmailFrom";
             this.txtEmailFrom.Size = new System.Drawing.Size(150, 20);
             this.txtEmailFrom.TabIndex = 6;
-            this.txtEmailFrom.TextChanged += new System.EventHandler(this.txtEmailFrom_TextChanged);
             // 
             // lblEmailTo
             // 
@@ -117,7 +114,6 @@
             this.txtEmailTo.Name = "txtEmailTo";
             this.txtEmailTo.Size = new System.Drawing.Size(150, 20);
             this.txtEmailTo.TabIndex = 5;
-            this.txtEmailTo.TextChanged += new System.EventHandler(this.txtEmailTo_TextChanged);
             // 
             // lblEmailSubject
             // 
@@ -134,7 +130,6 @@
             this.txtEmailSubject.Name = "txtEmailSubject";
             this.txtEmailSubject.Size = new System.Drawing.Size(150, 20);
             this.txtEmailSubject.TabIndex = 7;
-            this.txtEmailSubject.TextChanged += new System.EventHandler(this.txtEmailSubject_TextChanged);
             // 
             // btnAccept
             // 
@@ -161,7 +156,6 @@
             this.txtSmtpUser.Name = "txtSmtpUser";
             this.txtSmtpUser.Size = new System.Drawing.Size(150, 20);
             this.txtSmtpUser.TabIndex = 2;
-            this.txtSmtpUser.TextChanged += new System.EventHandler(this.txtSmtpPasswd_TextChanged);
             // 
             // grpSmtpInfo
             // 
@@ -182,20 +176,24 @@
             this.grpSmtpInfo.TabStop = false;
             this.grpSmtpInfo.Text = "SMTP Server Info";
             // 
-            // grpEmailInfo
+            // chkSslEnabled
             // 
-            this.grpEmailInfo.Controls.Add(this.txtEmailSubject);
-            this.grpEmailInfo.Controls.Add(this.txtEmailTo);
-            this.grpEmailInfo.Controls.Add(this.lblEmailTo);
-            this.grpEmailInfo.Controls.Add(this.lblEmailSubject);
-            this.grpEmailInfo.Controls.Add(this.txtEmailFrom);
-            this.grpEmailInfo.Controls.Add(this.lblEmailFrom);
-            this.grpEmailInfo.Location = new System.Drawing.Point(12, 180);
-            this.grpEmailInfo.Name = "grpEmailInfo";
-            this.grpEmailInfo.Size = new System.Drawing.Size(300, 100);
-            this.grpEmailInfo.TabIndex = 14;
-            this.grpEmailInfo.TabStop = false;
-            this.grpEmailInfo.Text = "Email Info";
+            this.chkSslEnabled.AutoSize = true;
+            this.chkSslEnabled.Location = new System.Drawing.Point(133, 125);
+            this.chkSslEnabled.Name = "chkSslEnabled";
+            this.chkSslEnabled.Size = new System.Drawing.Size(65, 17);
+            this.chkSslEnabled.TabIndex = 4;
+            this.chkSslEnabled.Text = "Enabled";
+            this.chkSslEnabled.UseVisualStyleBackColor = true;
+            // 
+            // lblSslEnabled
+            // 
+            this.lblSslEnabled.AutoSize = true;
+            this.lblSslEnabled.Location = new System.Drawing.Point(97, 126);
+            this.lblSslEnabled.Name = "lblSslEnabled";
+            this.lblSslEnabled.Size = new System.Drawing.Size(30, 13);
+            this.lblSslEnabled.TabIndex = 15;
+            this.lblSslEnabled.Text = "SSL:";
             // 
             // txtSmtpPasswd
             // 
@@ -214,24 +212,20 @@
             this.lblSmtpPasswd.TabIndex = 14;
             this.lblSmtpPasswd.Text = "SMTP Password:";
             // 
-            // lblSslEnabled
+            // grpEmailInfo
             // 
-            this.lblSslEnabled.AutoSize = true;
-            this.lblSslEnabled.Location = new System.Drawing.Point(97, 126);
-            this.lblSslEnabled.Name = "lblSslEnabled";
-            this.lblSslEnabled.Size = new System.Drawing.Size(30, 13);
-            this.lblSslEnabled.TabIndex = 15;
-            this.lblSslEnabled.Text = "SSL:";
-            // 
-            // chkSslEnabled
-            // 
-            this.chkSslEnabled.AutoSize = true;
-            this.chkSslEnabled.Location = new System.Drawing.Point(133, 125);
-            this.chkSslEnabled.Name = "chkSslEnabled";
-            this.chkSslEnabled.Size = new System.Drawing.Size(65, 17);
-            this.chkSslEnabled.TabIndex = 4;
-            this.chkSslEnabled.Text = "Enabled";
-            this.chkSslEnabled.UseVisualStyleBackColor = true;
+            this.grpEmailInfo.Controls.Add(this.txtEmailSubject);
+            this.grpEmailInfo.Controls.Add(this.txtEmailTo);
+            this.grpEmailInfo.Controls.Add(this.lblEmailTo);
+            this.grpEmailInfo.Controls.Add(this.lblEmailSubject);
+            this.grpEmailInfo.Controls.Add(this.txtEmailFrom);
+            this.grpEmailInfo.Controls.Add(this.lblEmailFrom);
+            this.grpEmailInfo.Location = new System.Drawing.Point(12, 180);
+            this.grpEmailInfo.Name = "grpEmailInfo";
+            this.grpEmailInfo.Size = new System.Drawing.Size(300, 100);
+            this.grpEmailInfo.TabIndex = 14;
+            this.grpEmailInfo.TabStop = false;
+            this.grpEmailInfo.Text = "Email Info";
             // 
             // EmailConfigForm
             // 

@@ -12,7 +12,6 @@ namespace USB_Detector
         public static Main FormMain;
         public static EmailConfigForm FormEmailConfig;
         public static EmailConfig EmailConfiguration;
-        public static EmailConfigValidator ConfigValidator;
         public static Mailer Emailer;
 
         /// <summary>
@@ -25,7 +24,6 @@ namespace USB_Detector
             Application.SetCompatibleTextRenderingDefault(false);
 
             // Prepare the forms
-            ConfigValidator = new EmailConfigValidator();
             FormEmailConfig = new EmailConfigForm();
             EmailConfiguration = new EmailConfig();
             Emailer = new Mailer();
