@@ -53,7 +53,7 @@ namespace USB_Detector
             else
             {
                 String errors = String.Concat(validationInfo.errors);
-                MessageBox.Show(errors, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(errors, "Invalid Information", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
