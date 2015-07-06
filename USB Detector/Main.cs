@@ -82,8 +82,11 @@ namespace USB_Detector
                     {
                         char driveLetter = DriveMaskToLetter(vol.dbcv_unitmask);
 
-                        txt_output.Text = "Device inserted. ";
-                        txt_output.Text += "\nDrive letter: " + driveLetter;
+                        txt_output.Text += "\r\n";
+                        txt_output.Text += "\r\n------------------------------";
+                        txt_output.Text += "\r\n" + DateTime.Now;
+                        txt_output.Text += "\r\nDevice inserted. ";
+                        txt_output.Text += "\r\nDrive letter: " + driveLetter;
                         if (driveLetter != '?')
                         {
                             // Add the device to the existing device map
@@ -91,9 +94,9 @@ namespace USB_Detector
                             devices.Add(driveLetter, device);
 
                             // Print the device data to the screen
-                            txt_output.Text += "\nDrive format: " + device.DriveFormat;
-                            txt_output.Text += "\nDrive label: " + device.DriveLabel;
-                            txt_output.Text += "\nDrive size (bytes): " + device.DriveSize;
+                            txt_output.Text += "\r\nDrive format: " + device.DriveFormat;
+                            txt_output.Text += "\r\nDrive label: " + device.DriveLabel;
+                            txt_output.Text += "\r\nDrive size (bytes): " + device.DriveSize;
 
                             // Email the device data
                             message = String.Format("Device inserted on {0}.", DateTime.Now);
@@ -109,8 +112,11 @@ namespace USB_Detector
                     {
                         char driveLetter = DriveMaskToLetter(vol.dbcv_unitmask);
 
-                        txt_output.Text = "Device removed.";
-                        txt_output.Text += "\nDrive letter: " + driveLetter;
+                        txt_output.Text += "\r\n";
+                        txt_output.Text += "\r\n------------------------------";
+                        txt_output.Text += "\r\n" + DateTime.Now;
+                        txt_output.Text += "\r\nDevice removed.";
+                        txt_output.Text += "\r\nDrive letter: " + driveLetter;
                         
                         // Check if device was already mapped
                         if (driveLetter != '?' && devices.ContainsKey(driveLetter))
@@ -119,9 +125,9 @@ namespace USB_Detector
                             DeviceInfo device = devices[driveLetter];
 
                             // Output information
-                            txt_output.Text += "\nDrive format: " + device.DriveFormat;
-                            txt_output.Text += "\nDrive label: " + device.DriveLabel;
-                            txt_output.Text += "\nDrive size (bytes): " + device.DriveSize;
+                            txt_output.Text += "\r\nDrive format: " + device.DriveFormat;
+                            txt_output.Text += "\r\nDrive label: " + device.DriveLabel;
+                            txt_output.Text += "\r\nDrive size (bytes): " + device.DriveSize;
 
                             // Email the device data
                             message = String.Format("Device removed on {0}.", DateTime.Now);
