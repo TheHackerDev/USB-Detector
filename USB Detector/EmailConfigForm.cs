@@ -114,9 +114,3 @@ namespace USB_Detector
         }
     }
 }
-
-/* TODO: Add validation with error fields to the input fields (validate on focus leave)
- *      Text length
- *      Not empty (unless optional) - is username and password always required on SMTP servers?
- *      Valid port (range and is number)
- */

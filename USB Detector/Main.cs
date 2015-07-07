@@ -70,6 +70,7 @@ namespace USB_Detector
                 if (m.Msg == WM_DEVICECHANGE)
                 {
                     String message;
+                    Dictionary<string,string> mailResponse;
 
                     DEV_BROADCAST_VOLUME vol = (DEV_BROADCAST_VOLUME)Marshal.PtrToStructure(m.LParam, typeof(DEV_BROADCAST_VOLUME));
 
@@ -78,11 +79,11 @@ namespace USB_Detector
                     {
                         char driveLetter = DriveMaskToLetter(vol.dbcv_unitmask);
 
-                        txt_output.Text += "\r\n";
-                        txt_output.Text += "\r\n------------------------------";
-                        txt_output.Text += "\r\n" + DateTime.Now;
-                        txt_output.Text += "\r\nDevice inserted. ";
-                        txt_output.Text += "\r\nDrive letter: " + driveLetter;
+                        txt_output.AppendText("\r\n");
+                        txt_output.AppendText("\r\n------------------------------");
+                        txt_output.AppendText("\r\n" + DateTime.Now);
+                        txt_output.AppendText("\r\nDevice inserted. ");
+                        txt_output.AppendText("\r\nDrive letter: " + driveLetter);
                         if (driveLetter != '?')
                         {
                             // Add the device to the existing device map
@@ -90,9 +91,9 @@ namespace USB_Detector
                             devices.Add(driveLetter, device);
 
                             // Print the device data to the screen
-                            txt_output.Text += "\r\nDrive format: " + device.DriveFormat;
-                            txt_output.Text += "\r\nDrive label: " + device.DriveLabel;
-                            txt_output.Text += "\r\nDrive size (bytes): " + device.DriveSize;
+                            txt_output.AppendText("\r\nDrive format: " + device.DriveFormat);
+                            txt_output.AppendText("\r\nDrive label: " + device.DriveLabel);
+                            txt_output.AppendText("\r\nDrive size (bytes): " + device.DriveSize);
 
                             // Email the device data
                             message = String.Format("Device inserted on {0}.", DateTime.Now);
@@ -101,18 +102,26 @@ namespace USB_Detector
                             message += String.Format("\nDrive label: {0}", device.DriveLabel);
                             message += String.Format("\nDrive size (bytes): {0}", device.DriveSize);
 
-                            Program.Emailer.SendMail(message);
+                            mailResponse = Program.Emailer.SendMail(message);
+                            if (mailResponse["success"].Equals("0"))
+                            {
+                                // Output the error to the screen
+                                txt_output.AppendText("\r\n******************************");
+                                txt_output.AppendText("\r\n* Error sending mail.");
+                                txt_output.AppendText("\r\n* Please check the configuration and make sure you are connected to the internet.");
+                                txt_output.AppendText("\r\n******************************");
+                            }
                         }
                     }
                     else if (m.WParam.ToInt32() == DBT_DEVICEREMOVALCOMPLETE)
                     {
                         char driveLetter = DriveMaskToLetter(vol.dbcv_unitmask);
 
-                        txt_output.Text += "\r\n";
-                        txt_output.Text += "\r\n------------------------------";
-                        txt_output.Text += "\r\n" + DateTime.Now;
-                        txt_output.Text += "\r\nDevice removed.";
-                        txt_output.Text += "\r\nDrive letter: " + driveLetter;
+                        txt_output.AppendText("\r\n");
+                        txt_output.AppendText("\r\n------------------------------");
+                        txt_output.AppendText("\r\n" + DateTime.Now);
+                        txt_output.AppendText("\r\nDevice removed.");
+                        txt_output.AppendText("\r\nDrive letter: " + driveLetter);
                         
                         // Check if device was already mapped
                         if (driveLetter != '?' && devices.ContainsKey(driveLetter))
@@ -121,9 +130,9 @@ namespace USB_Detector
                             DeviceInfo device = devices[driveLetter];
 
                             // Output information
-                            txt_output.Text += "\r\nDrive format: " + device.DriveFormat;
-                            txt_output.Text += "\r\nDrive label: " + device.DriveLabel;
-                            txt_output.Text += "\r\nDrive size (bytes): " + device.DriveSize;
+                            txt_output.AppendText("\r\nDrive format: " + device.DriveFormat);
+                            txt_output.AppendText("\r\nDrive label: " + device.DriveLabel);
+                            txt_output.AppendText("\r\nDrive size (bytes): " + device.DriveSize);
 
                             // Email the device data
                             message = String.Format("Device removed on {0}.", DateTime.Now);
@@ -132,8 +141,16 @@ namespace USB_Detector
                             message += String.Format("\nDrive label: {0}", device.DriveLabel);
                             message += String.Format("\nDrive size (bytes): {0}", device.DriveSize);
 
-                            Program.Emailer.SendMail(message);
-
+                            mailResponse = Program.Emailer.SendMail(message);
+                            if (mailResponse["success"].Equals("0"))
+                            {
+                                // Output the error to the screen
+                                txt_output.AppendText("\r\n******************************");
+                                txt_output.AppendText("\r\n* Error sending mail.");
+                                txt_output.Text +=
+                                    "\r\n* Please check the configuration and make sure you are connected to the internet.";
+                                txt_output.AppendText("\r\n******************************");
+                            }
                             // Remove drive from mapping
                             devices.Remove(driveLetter);
                         }
@@ -219,3 +236,5 @@ namespace USB_Detector
         }
     }
 }
+
+//TODO: Write output to a log file (with option of setting where the log file is; enable log file by default)

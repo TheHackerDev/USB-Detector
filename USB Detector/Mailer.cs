@@ -11,10 +11,14 @@ namespace USB_Detector
 {
     class Mailer
     {
-        public string[] SendMail(String message)
+        public Dictionary<string,string> SendMail(String message)
         {
-            // ["0"] == success. Else ["1", "Failure message"]
-            string[] result = new []{"0"};
+            // Success = "1" when successful, "0" when not
+            Dictionary<string,string> result = new Dictionary<string, string>()
+            {
+                {"success", "1"},
+                {"message", ""}
+            };
 
             try
             {
@@ -36,13 +40,11 @@ namespace USB_Detector
             }
             catch (Exception e)
             {
-                result = new[] {"1", e.Message};
-                // TODO: Output a message to the main screen on errors
+                result["success"] = "0";
+                result["message"] = e.Message;
             }
 
             return result;
         }
     }
 }
-
-// TODO: If internet not available, save in queue on local device

@@ -69,7 +69,7 @@
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.quitToolStripMenuItem.Text = "E&xit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.ExitProgram);
             // 
@@ -85,7 +85,7 @@
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.settingsToolStripMenuItem.Text = "&Settings";
+            this.settingsToolStripMenuItem.Text = "&Configuration";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // Main
