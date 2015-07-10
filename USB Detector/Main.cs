@@ -55,7 +55,11 @@ namespace USB_Detector
             EnumDrives();
 
             // Check whether an email configuration already exists
-            if (!Program.EmailConfiguration.HasValidConfigFile())
+            if (Program.FormEmailConfig.HasValidConfigFile())
+            {
+                // TODO: load in email configuration
+            }
+            else
             {
                 // Open the email configuration window right away
                 Program.FormEmailConfig.ShowDialog();
@@ -101,6 +105,7 @@ namespace USB_Detector
                             message += String.Format("\nDrive format: {0}", device.DriveFormat);
                             message += String.Format("\nDrive label: {0}", device.DriveLabel);
                             message += String.Format("\nDrive size (bytes): {0}", device.DriveSize);
+                            // TODO: save message to a log file
 
                             mailResponse = Program.Emailer.SendMail(message);
                             if (mailResponse["success"].Equals("0"))
@@ -237,4 +242,4 @@ namespace USB_Detector
     }
 }
 
-//TODO: Write output to a log file (with option of setting where the log file is; enable log file by default)
+//TODO: Add options for log files (location, enabled- on by default)

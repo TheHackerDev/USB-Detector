@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 
 namespace USB_Detector
 {
@@ -30,7 +32,7 @@ namespace USB_Detector
                 // Email info
                 Program.EmailConfiguration.EmailFrom = txtEmailFrom.Text;
                 Program.EmailConfiguration.EmailTo = txtEmailTo.Text;
-                if (string.IsNullOrWhiteSpace(txtEmailSubject.Text))
+                if (!string.IsNullOrWhiteSpace(txtEmailSubject.Text))
                 {
                     Program.EmailConfiguration.EmailSubject = txtEmailSubject.Text;
                 }
@@ -45,7 +47,7 @@ namespace USB_Detector
                 Program.EmailConfiguration.SmtpSsl = chkSslEnabled.Checked;
 
                 // Write the configuration to the configuration file
-                Program.EmailConfiguration.WriteToConfigFile();
+                WriteToConfigFile();
 
                 // Switch back to the main window
                 this.Close();
@@ -57,13 +59,43 @@ namespace USB_Detector
             }
         }
 
+        // Checks for a config file.
+        public bool HasValidConfigFile()
+        {
+            // TODO: Implement configuration file saving and fetching
+            // TODO: Implement validation on the configuration file values, don't load in values if it does not validate
+
+            return false;
+        }
+
+        public void WriteToConfigFile()
+        {
+            // Serialize the email configuration
+            string jsonConfig = JsonConvert.SerializeObject(Program.EmailConfiguration);
+            
+            // Ensure the folder exists in %AppData% before saving
+            string appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string configFolder = Path.Combine(appDataFolder, "USB Detector");
+            if (!Directory.Exists(configFolder))
+            {
+                Directory.CreateDirectory(configFolder);
+            }
+
+            // Write to the file
+            string emailConfigFile = Path.Combine(configFolder, "Email Configuration.txt");
+            using (var writer = new StreamWriter(emailConfigFile))
+            {
+                writer.WriteLine(jsonConfig);
+            }
+        }
+
         // Validates input fields
         private EmailConfigFormValidation Validation()
         {
             bool valid = true; // assume it is valid
             List<string> errors = new List<string>();
 
-            #region Empty Text
+            #region Empty Text Validation
             if (string.IsNullOrWhiteSpace(txtSmtpServer.Text))
             {
                 valid = false;

@@ -25,7 +25,7 @@ namespace USB_Detector
 
             // Prepare the forms
             FormEmailConfig = new EmailConfigForm();
-            EmailConfiguration = new EmailConfig();
+            EmailConfiguration = new EmailConfig {EmailSubject = "Alert from USB Detector"}; // Helpful default
             Emailer = new Mailer();
             FormMain = new Main();
 
