@@ -21,7 +21,7 @@ namespace USB_Detector
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            EmailConfigFormValidation validationInfo = Validation();
+            EmailConfigFormValidation validationInfo = ConfigFormValidation();
             
             if (validationInfo.isValid)
             {
@@ -62,10 +62,48 @@ namespace USB_Detector
         // Checks for a config file.
         public bool HasValidConfigFile()
         {
-            // TODO: Implement configuration file saving and fetching
-            // TODO: Implement validation on the configuration file values, don't load in values if it does not validate
+            bool isValid = false;
+            string configFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "USB Detector", "Email Configuration.txt");
+            string configTextJson;
+            EmailConfig tmpEmailConfig;
 
-            return false;
+            // Check for config file and sets the configuration if it is valid
+            if (File.Exists(configFile))
+            {
+                using (var reader = new StreamReader(configFile))
+                {
+                    // Read in the values from the configuration file
+                    configTextJson = reader.ReadLine(); // should only have one line in the config file
+
+                    // Validate config file contents
+                    tmpEmailConfig = JsonConvert.DeserializeObject<EmailConfig>(configTextJson);
+                    txtEmailFrom.Text = tmpEmailConfig.EmailFrom;
+                    txtEmailTo.Text = tmpEmailConfig.EmailTo;
+                    txtEmailSubject.Text = tmpEmailConfig.EmailSubject;
+                    txtSmtpServer.Text = tmpEmailConfig.SmtpServer;
+                    txtSmtpPort.Text = tmpEmailConfig.SmtpPort.ToString();
+                    txtSmtpUser.Text = tmpEmailConfig.SmtpUsername;
+                    txtSmtpPasswd.Text = tmpEmailConfig.SmtpPassword;
+
+                    EmailConfigFormValidation validation = ConfigFormValidation();
+
+                    if (validation.isValid)
+                    {
+                        isValid = true;
+
+                        // Set the configuration
+                        Program.EmailConfiguration.EmailFrom = tmpEmailConfig.EmailFrom;
+                        Program.EmailConfiguration.EmailTo = tmpEmailConfig.EmailTo;
+                        Program.EmailConfiguration.EmailSubject = tmpEmailConfig.EmailSubject;
+                        Program.EmailConfiguration.SmtpServer = tmpEmailConfig.SmtpServer;
+                        Program.EmailConfiguration.SmtpPort = tmpEmailConfig.SmtpPort;
+                        Program.EmailConfiguration.SmtpUsername = tmpEmailConfig.SmtpUsername;
+                        Program.EmailConfiguration.SmtpPassword = tmpEmailConfig.SmtpPassword;
+                    }
+                }
+            }
+
+            return isValid;
         }
 
         public void WriteToConfigFile()
@@ -90,7 +128,7 @@ namespace USB_Detector
         }
 
         // Validates input fields
-        private EmailConfigFormValidation Validation()
+        private EmailConfigFormValidation ConfigFormValidation()
         {
             bool valid = true; // assume it is valid
             List<string> errors = new List<string>();
@@ -146,3 +184,6 @@ namespace USB_Detector
         }
     }
 }
+
+
+// TODO: throw errors to main screen without crashing.
