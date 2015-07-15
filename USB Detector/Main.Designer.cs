@@ -40,11 +40,11 @@
             // txt_output
             // 
             this.txt_output.AcceptsReturn = true;
-            this.txt_output.Location = new System.Drawing.Point(102, 77);
+            this.txt_output.Location = new System.Drawing.Point(12, 27);
             this.txt_output.Multiline = true;
             this.txt_output.Name = "txt_output";
             this.txt_output.ReadOnly = true;
-            this.txt_output.Size = new System.Drawing.Size(576, 363);
+            this.txt_output.Size = new System.Drawing.Size(380, 422);
             this.txt_output.TabIndex = 0;
             // 
             // menuStrip
@@ -54,7 +54,7 @@
             this.editToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(784, 24);
+            this.menuStrip.Size = new System.Drawing.Size(404, 24);
             this.menuStrip.TabIndex = 1;
             this.menuStrip.Text = "Menu";
             // 
@@ -84,7 +84,7 @@
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.settingsToolStripMenuItem.Text = "&Configuration";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
@@ -92,7 +92,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.ClientSize = new System.Drawing.Size(404, 461);
             this.Controls.Add(this.txt_output);
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;
