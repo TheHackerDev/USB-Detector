@@ -96,14 +96,14 @@ namespace USB_Detector
                             txt_output.AppendText("\r\nDrive label: " + device.DriveLabel);
                             txt_output.AppendText("\r\nDrive size (bytes): " + device.DriveSize);
 
-                            // Email the device data
+                            // Save the device information
                             message = String.Format("Device inserted on {0}.", DateTime.Now);
-                            message += String.Format("\nDrive letter: {0}", driveLetter);
-                            message += String.Format("\nDrive format: {0}", device.DriveFormat);
-                            message += String.Format("\nDrive label: {0}", device.DriveLabel);
-                            message += String.Format("\nDrive size (bytes): {0}", device.DriveSize);
-                            // TODO: save message to a log file
+                            message += String.Format("\r\nDrive letter: {0}", driveLetter);
+                            message += String.Format("\r\nDrive format: {0}", device.DriveFormat);
+                            message += String.Format("\r\nDrive label: {0}", device.DriveLabel);
+                            message += String.Format("\r\nDrive size (bytes): {0}\r\n", device.DriveSize);
 
+                            // Email the device information
                             mailResponse = Program.Emailer.SendMail(message);
                             if (mailResponse["success"].Equals("0"))
                             {
@@ -112,6 +112,12 @@ namespace USB_Detector
                                 txt_output.AppendText("\r\n* Error sending mail.");
                                 txt_output.AppendText("\r\n* Please check the configuration and make sure you are connected to the internet.");
                                 txt_output.AppendText("\r\n******************************");
+                            }
+
+                            // Save the device information to a log file
+                            using (var writer = new StreamWriter(Program.OtherSettings.LogFileLocation, true))
+                            {
+                                writer.WriteLine(message);
                             }
                         }
                     }
@@ -136,13 +142,15 @@ namespace USB_Detector
                             txt_output.AppendText("\r\nDrive label: " + device.DriveLabel);
                             txt_output.AppendText("\r\nDrive size (bytes): " + device.DriveSize);
 
-                            // Email the device data
+                            // Save the device information
                             message = String.Format("Device removed on {0}.", DateTime.Now);
-                            message += String.Format("\nDrive letter: {0}", driveLetter);
-                            message += String.Format("\nDrive format: {0}", device.DriveFormat);
-                            message += String.Format("\nDrive label: {0}", device.DriveLabel);
-                            message += String.Format("\nDrive size (bytes): {0}", device.DriveSize);
+                            message += String.Format("\r\nDrive letter: {0}", driveLetter);
+                            message += String.Format("\r\nDrive format: {0}", device.DriveFormat);
+                            message += String.Format("\r\nDrive label: {0}", device.DriveLabel);
+                            message += String.Format("\r\nDrive size (bytes): {0}\r\n", device.DriveSize);
 
+
+                            // Email the device information
                             mailResponse = Program.Emailer.SendMail(message);
                             if (mailResponse["success"].Equals("0"))
                             {
@@ -153,6 +161,13 @@ namespace USB_Detector
                                     "\r\n* Please check the configuration and make sure you are connected to the internet.";
                                 txt_output.AppendText("\r\n******************************");
                             }
+
+                            // Save the device information to a log file
+                            using (var writer = new StreamWriter(Program.OtherSettings.LogFileLocation, true))
+                            {
+                                writer.WriteLine(message);
+                            }
+
                             // Remove drive from mapping
                             devices.Remove(driveLetter);
                         }
@@ -236,7 +251,16 @@ namespace USB_Detector
         {
             Program.FormEmailConfig.ShowDialog();
         }
+
+        private void WriteToLog(string message)
+        {
+            
+        }
+
+        private void otherSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Open the Other Settings dialog
+            Program.FormOtherSettings.ShowDialog();
+        }
     }
 }
-
-//TODO: Add options for log files (location, enabled- on by default)

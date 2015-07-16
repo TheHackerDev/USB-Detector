@@ -187,3 +187,4 @@ namespace USB_Detector
 
 
 // TODO: throw errors to main screen without crashing.
+// TODO: Instead of validating empty strings, simply use a try catch and send an error to the screen when the email does not send (already in place)
