@@ -107,6 +107,9 @@ namespace USB_Detector
                             mailResponse = Program.Emailer.SendMail(message);
                             if (mailResponse["success"].Equals("0"))
                             {
+                                // Save the error
+                                message += "*ERROR: Could not send email.\r\n";
+
                                 // Output the error to the screen
                                 txt_output.AppendText("\r\n******************************");
                                 txt_output.AppendText("\r\n* Error sending mail.");
@@ -154,6 +157,9 @@ namespace USB_Detector
                             mailResponse = Program.Emailer.SendMail(message);
                             if (mailResponse["success"].Equals("0"))
                             {
+                                // Save the error
+                                message += "*ERROR: Could not send email.\r\n";
+
                                 // Output the error to the screen
                                 txt_output.AppendText("\r\n******************************");
                                 txt_output.AppendText("\r\n* Error sending mail.");
