@@ -21,14 +21,24 @@ namespace USB_Detector
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            EmailConfigFormValidation validationInfo = ConfigFormValidation();
-            
-            if (validationInfo.isValid)
-            {
-                // Temporary value for the smtp port parser
-                int smtpPort;
+            // Temporary value for the smtp port parser
+            int smtpPort;
 
-                // Load the values into the email configuration instance
+            // Load the values into the email configuration instance
+
+            // Only continue if valid port entered
+            if (Int32.TryParse(txtSmtpPort.Text, out smtpPort))
+            {
+                // The port may have been incorrect before; ensure the text box is back to being not highlighted
+                txtSmtpPort.BackColor = SystemColors.Window;
+
+                // SMTP info
+                Program.EmailConfiguration.SmtpPort = smtpPort;
+                Program.EmailConfiguration.SmtpServer = txtSmtpServer.Text;
+                Program.EmailConfiguration.SmtpUsername = txtSmtpUser.Text;
+                Program.EmailConfiguration.SmtpPassword = txtSmtpPasswd.Text;
+                Program.EmailConfiguration.SmtpSsl = chkSslEnabled.Checked;
+
                 // Email info
                 Program.EmailConfiguration.EmailFrom = txtEmailFrom.Text;
                 Program.EmailConfiguration.EmailTo = txtEmailTo.Text;
@@ -36,15 +46,6 @@ namespace USB_Detector
                 {
                     Program.EmailConfiguration.EmailSubject = txtEmailSubject.Text;
                 }
-                // SMTP info
-                if (Int32.TryParse(txtSmtpPort.Text, out smtpPort))
-                {
-                    Program.EmailConfiguration.SmtpPort = smtpPort;
-                }
-                Program.EmailConfiguration.SmtpServer = txtSmtpServer.Text;
-                Program.EmailConfiguration.SmtpUsername = txtSmtpUser.Text;
-                Program.EmailConfiguration.SmtpPassword = txtSmtpPasswd.Text;
-                Program.EmailConfiguration.SmtpSsl = chkSslEnabled.Checked;
 
                 // Write the configuration to the configuration file
                 WriteToConfigFile();
@@ -54,13 +55,17 @@ namespace USB_Detector
             }
             else
             {
-                String errors = String.Concat(validationInfo.errors);
-                MessageBox.Show(errors, "Invalid Information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // Highlight the incorrect information
+                txtSmtpPort.BackColor = Color.Red;
+
+                // Display a message box to the user and do not close the configuration dialogue
+                MessageBox.Show("Invalid port entered. Please enter a number.", "Invalid Port", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
         // Checks for a config file and tries to load it in
-        public bool HasValidConfigFile()
+        public bool CanLoadConfigFile()
         {
             bool isValid = false;
             string configFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "USB Detector", "Email Configuration.txt");
@@ -120,6 +125,7 @@ namespace USB_Detector
             }
         }
 
+        #region Saved For Future Use
         // Validates input fields
         private EmailConfigFormValidation ConfigFormValidation()
         {
@@ -175,9 +181,9 @@ namespace USB_Detector
                 this.errors = errors;
             }
         }
+        #endregion
     }
 }
 
 
 // TODO: throw errors to main screen without crashing.
-// TODO: Instead of validating empty strings, simply use a try catch and send an error to the screen when the email does not send (already in place)

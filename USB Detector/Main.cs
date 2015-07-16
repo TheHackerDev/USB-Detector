@@ -55,7 +55,7 @@ namespace USB_Detector
             EnumDrives();
 
             // Check whether an email configuration already exists
-            if (!Program.FormEmailConfig.HasValidConfigFile())
+            if (!Program.FormEmailConfig.CanLoadConfigFile())
             {
                 // Open the email configuration window right away
                 Program.FormEmailConfig.ShowDialog();

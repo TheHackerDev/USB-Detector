@@ -78,6 +78,7 @@
             // 
             // txtSmtpPort
             // 
+            this.txtSmtpPort.BackColor = System.Drawing.SystemColors.Window;
             this.txtSmtpPort.Location = new System.Drawing.Point(133, 45);
             this.txtSmtpPort.Name = "txtSmtpPort";
             this.txtSmtpPort.Size = new System.Drawing.Size(150, 20);
