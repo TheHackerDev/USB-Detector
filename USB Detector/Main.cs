@@ -258,11 +258,6 @@ namespace USB_Detector
             Program.FormEmailConfig.ShowDialog();
         }
 
-        private void WriteToLog(string message)
-        {
-            
-        }
-
         private void otherSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Open the Other Settings dialog

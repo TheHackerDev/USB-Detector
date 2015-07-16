@@ -59,47 +59,40 @@ namespace USB_Detector
             }
         }
 
-        // Checks for a config file.
+        // Checks for a config file and tries to load it in
         public bool HasValidConfigFile()
         {
             bool isValid = false;
             string configFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "USB Detector", "Email Configuration.txt");
-            string configTextJson;
-            EmailConfig tmpEmailConfig;
 
             // Check for config file and sets the configuration if it is valid
             if (File.Exists(configFile))
             {
-                using (var reader = new StreamReader(configFile))
+                try
                 {
-                    // Read in the values from the configuration file
-                    configTextJson = reader.ReadLine(); // should only have one line in the config file
-
-                    // Validate config file contents
-                    tmpEmailConfig = JsonConvert.DeserializeObject<EmailConfig>(configTextJson);
-                    txtEmailFrom.Text = tmpEmailConfig.EmailFrom;
-                    txtEmailTo.Text = tmpEmailConfig.EmailTo;
-                    txtEmailSubject.Text = tmpEmailConfig.EmailSubject;
-                    txtSmtpServer.Text = tmpEmailConfig.SmtpServer;
-                    txtSmtpPort.Text = tmpEmailConfig.SmtpPort.ToString();
-                    txtSmtpUser.Text = tmpEmailConfig.SmtpUsername;
-                    txtSmtpPasswd.Text = tmpEmailConfig.SmtpPassword;
-
-                    EmailConfigFormValidation validation = ConfigFormValidation();
-
-                    if (validation.isValid)
+                    using (var reader = new StreamReader(configFile))
                     {
-                        isValid = true;
+                        // Read in the values from the configuration file
+                        string configTextJson = reader.ReadLine(); // should only have one line in the config file
+                        Program.EmailConfiguration = JsonConvert.DeserializeObject<EmailConfig>(configTextJson);
 
-                        // Set the configuration
-                        Program.EmailConfiguration.EmailFrom = tmpEmailConfig.EmailFrom;
-                        Program.EmailConfiguration.EmailTo = tmpEmailConfig.EmailTo;
-                        Program.EmailConfiguration.EmailSubject = tmpEmailConfig.EmailSubject;
-                        Program.EmailConfiguration.SmtpServer = tmpEmailConfig.SmtpServer;
-                        Program.EmailConfiguration.SmtpPort = tmpEmailConfig.SmtpPort;
-                        Program.EmailConfiguration.SmtpUsername = tmpEmailConfig.SmtpUsername;
-                        Program.EmailConfiguration.SmtpPassword = tmpEmailConfig.SmtpPassword;
+                        // Load in the configuration values to the form
+                        txtSmtpServer.Text = Program.EmailConfiguration.SmtpServer;
+                        txtSmtpPort.Text = Program.EmailConfiguration.SmtpPort.ToString();
+                        txtSmtpUser.Text = Program.EmailConfiguration.SmtpUsername;
+                        txtSmtpPasswd.Text = Program.EmailConfiguration.SmtpPassword;
+                        txtEmailFrom.Text = Program.EmailConfiguration.EmailFrom;
+                        txtEmailTo.Text = Program.EmailConfiguration.EmailTo;
+                        txtEmailSubject.Text = Program.EmailConfiguration.EmailSubject;
+
+                        // All seems to be well and valid
+                        isValid = true;
                     }
+                }
+                catch (Exception e)
+                {
+                    // An error occured, don't load the config file
+                    isValid = false;
                 }
             }
 
