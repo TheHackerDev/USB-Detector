@@ -1,14 +1,13 @@
-﻿using System;
+﻿#region imports
+
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+
+#endregion
 
 namespace USB_Detector
 {
@@ -68,7 +67,8 @@ namespace USB_Detector
         public bool CanLoadConfigFile()
         {
             bool isValid = false;
-            string configFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "USB Detector", "Email Configuration.txt");
+            string configFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                "USB Detector", "Email Configuration.txt");
 
             // Check for config file and sets the configuration if it is valid
             if (File.Exists(configFile))
@@ -108,7 +108,7 @@ namespace USB_Detector
         {
             // Serialize the email configuration
             string jsonConfig = JsonConvert.SerializeObject(Program.EmailConfiguration);
-            
+
             // Ensure the folder exists in %AppData% before saving
             string appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             string configFolder = Path.Combine(appDataFolder, "USB Detector");
@@ -126,6 +126,7 @@ namespace USB_Detector
         }
 
         #region Saved For Future Use
+
         // Validates input fields
         private EmailConfigFormValidation ConfigFormValidation()
         {
@@ -133,6 +134,7 @@ namespace USB_Detector
             List<string> errors = new List<string>();
 
             #region Empty Text Validation
+
             if (string.IsNullOrWhiteSpace(txtSmtpServer.Text))
             {
                 valid = false;
@@ -163,8 +165,9 @@ namespace USB_Detector
                 valid = false;
                 errors.Add("Email From address cannot be blank.\r\n");
             }
+
             #endregion
-            
+
             // Return validation information
             return new EmailConfigFormValidation(valid, errors);
         }
@@ -181,9 +184,7 @@ namespace USB_Detector
                 this.errors = errors;
             }
         }
+
         #endregion
     }
 }
-
-
-// TODO: throw errors to main screen without crashing.

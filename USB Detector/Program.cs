@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#region imports
+
+using System;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
+#endregion
 
 namespace USB_Detector
 {
-    static class Program
+    internal static class Program
     {
         // Forms
         public static Main FormMain;
@@ -18,10 +19,10 @@ namespace USB_Detector
         public static OtherSettings OtherSettings;
 
         /// <summary>
-        /// The main entry point for the application.
+        ///     The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -31,7 +32,9 @@ namespace USB_Detector
             EmailConfiguration = new EmailConfig {EmailSubject = "Alert from USB Detector"}; // Helpful default
             OtherSettings = new OtherSettings
             {
-                LogFileLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "USB Detector", "log.txt"), 
+                LogFileLocation =
+                    Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "USB Detector",
+                        "log.txt"),
                 LoggingEnabled = true
             }; // defaults
             FormOtherSettings = new OtherSettingsForm();

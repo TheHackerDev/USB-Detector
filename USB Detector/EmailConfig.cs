@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace USB_Detector
+﻿namespace USB_Detector
 {
-    class EmailConfig
+    internal class EmailConfig
     {
         public string SmtpServer { get; set; }
         public int SmtpPort { get; set; }
@@ -19,4 +12,3 @@ namespace USB_Detector
         public string EmailSubject { get; set; }
     }
 }
-

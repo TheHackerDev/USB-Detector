@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿#region imports
+
+using System;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+
+#endregion
 
 namespace USB_Detector
 {
@@ -42,7 +39,7 @@ namespace USB_Detector
         {
             Program.OtherSettings.LogFileLocation = txtLogLocation.Text;
             Program.OtherSettings.LoggingEnabled = chkLogEnabled.Checked;
-            
+
             // Serialize the configuration into Json
             string jsonConfig = JsonConvert.SerializeObject(Program.OtherSettings);
 
@@ -69,7 +66,8 @@ namespace USB_Detector
         {
             try
             {
-                string configFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "USB Detector", "Other Settings.txt");
+                string configFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                    "USB Detector", "Other Settings.txt");
                 string configTextJson;
 
                 // If the config file exists, try loading the settings into the config

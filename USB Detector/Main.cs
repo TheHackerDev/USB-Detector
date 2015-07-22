@@ -1,14 +1,12 @@
-﻿using System;
+﻿#region imports
+
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
+#endregion
 
 namespace USB_Detector
 {
@@ -31,6 +29,7 @@ namespace USB_Detector
 
         // The device information
         private Dictionary<char, DeviceInfo> devices = new Dictionary<char, DeviceInfo>(); // CHAR SHOULD BE UPPER CASE
+
         public struct DeviceInfo
         {
             public readonly string DriveFormat;
@@ -50,7 +49,7 @@ namespace USB_Detector
         public Main()
         {
             InitializeComponent();
-            
+
             // Get the existing drive information
             EnumDrives();
 
@@ -59,7 +58,6 @@ namespace USB_Detector
             {
                 // Open the email configuration window right away
                 Program.FormEmailConfig.ShowDialog();
-                
             }
         }
 
@@ -71,9 +69,10 @@ namespace USB_Detector
                 if (m.Msg == WM_DEVICECHANGE)
                 {
                     String message;
-                    Dictionary<string,string> mailResponse;
+                    Dictionary<string, string> mailResponse;
 
-                    DEV_BROADCAST_VOLUME vol = (DEV_BROADCAST_VOLUME)Marshal.PtrToStructure(m.LParam, typeof(DEV_BROADCAST_VOLUME));
+                    DEV_BROADCAST_VOLUME vol =
+                        (DEV_BROADCAST_VOLUME) Marshal.PtrToStructure(m.LParam, typeof (DEV_BROADCAST_VOLUME));
 
                     // The WParam value identifies what is occurring.
                     if (m.WParam.ToInt32() == DBT_DEVICEARRIVAL)
@@ -113,7 +112,8 @@ namespace USB_Detector
                                 // Output the error to the screen
                                 txt_output.AppendText("\r\n******************************");
                                 txt_output.AppendText("\r\n* Error sending mail.");
-                                txt_output.AppendText("\r\n* Please check the configuration and make sure you are connected to the internet.");
+                                txt_output.AppendText(
+                                    "\r\n* Please check the configuration and make sure you are connected to the internet.");
                                 txt_output.AppendText("\r\n******************************");
                             }
 
@@ -133,7 +133,7 @@ namespace USB_Detector
                         txt_output.AppendText("\r\n" + DateTime.Now);
                         txt_output.AppendText("\r\nDevice removed.");
                         txt_output.AppendText("\r\nDrive letter: " + driveLetter);
-                        
+
                         // Check if device was already mapped
                         if (driveLetter != '?' && devices.ContainsKey(driveLetter))
                         {
@@ -184,7 +184,7 @@ namespace USB_Detector
             {
                 // Sometimes exceptions occur before the device is initialized.
             }
-            
+
             // Continue to do what was originally done with the message
             base.WndProc(ref m);
         }
@@ -195,11 +195,11 @@ namespace USB_Detector
             char letter;
             string drives = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; //1 = A, 2 = B, 3 = C
             int count = 0;
-            int tmpMask = logicalUnitMask / 2;
+            int tmpMask = logicalUnitMask/2;
             // while there is any bit set in the mask shift it right
-            while (tmpMask != 0)      
+            while (tmpMask != 0)
             {
-                tmpMask = tmpMask / 2;
+                tmpMask = tmpMask/2;
                 count++;
             }
             letter = count < drives.Length ? drives[count] : '?';
@@ -212,9 +212,9 @@ namespace USB_Detector
             {
                 DriveInfo info = new DriveInfo(driveLetter.ToString());
                 DeviceInfo device = new DeviceInfo(
-                    info.DriveFormat, 
-                    info.TotalSize, 
-                    info.VolumeLabel, 
+                    info.DriveFormat,
+                    info.TotalSize,
+                    info.VolumeLabel,
                     driveLetter
                     );
 
