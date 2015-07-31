@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="USB Detector.exe" version="1.0.0.0" publicKeyToken="435d19338c1f1c7a" language="neutral" processorArchitecture="msil" type="win32" />
+  <description asmv2:iconFile="icon.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="USB Detector" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="USB Detector.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the 
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward 
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Newtonsoft.Json.dll" size="520192">
+      <assemblyIdentity name="Newtonsoft.Json" version="7.0.0.0" publicKeyToken="30AD4FE6B2A6AEED" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>nsosXtGHteExnDWaq/g4KZITHv4YVLiZwjqT/iJ0luM=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="USB Detector.exe" size="768920">
+      <assemblyIdentity name="USB Detector" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>TtcSEUeGP9WiuaebDerghYKB8yjSccygCc0esUFSIdA=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="icon.ico" size="370070">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>LIt9d61+sR3EV69tHyVA+9IDKvol+hDdDdiqmZZHy0I=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="USB Detector.exe.config" size="179">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>ol1gyhBrenphBGtnv7qwgv8zHMZ1TIlc4hJOlSUx4RA=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=iPhone\Me" issuerKeyHash="c550fb42a9ef252ad108a7a723ca66673f3ddac3" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>ycTBp8CIO7g0fSaNSe8d61LhLfp7XMl/ud+tkPOOnyQ=</DigestValue></Reference></SignedInfo><SignatureValue>FHWTEy7VfgwFV0JSJgGZYsR227R89EihSys5KfQm2fYzz54lzJ+FOS2TBvU6ioDuzM+lrWrAQ55ucy4BStYUthvEMxvMlABYDK5n7d8IvrO/o1i+vQ5casBy6hF2dmQznvrYB2/HWRJCk/fYEHd4tqsxUzdPAl0jPvwBS3c9Fqc=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>2umPtStYnaV+UKrUitnGPDo2uiOUTGMwpMnEo3QuYJcRSS+x+dYWpw+0nWkQ3kzP2X2y8QI2DSebRqF4BvJcl1mlOAHnIjgYThlpgrP5dYC7re+GbTl68nOSUoKWlk65/KLviDT3JoajFPIu+g/6tzSSn6terLQcZGv21EqbA8U=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="249f8ef390addfb97fc95c7bfa2de152eb1def498d267d34b83b88c0a7c1c4c9" Description="" Url=""><as:assemblyIdentity name="USB Detector.exe" version="1.0.0.0" publicKeyToken="435d19338c1f1c7a" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=iPhone\Me</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>y2tuAY9RxznZJgqRO5hQfAs1626fQFEKfu+4F9CirxA=</DigestValue></Reference></SignedInfo><SignatureValue>lKoD+XD0Uq+Fw6wm6SN/vRFW3wBjSFKMr3uepPKW6J3Vz0oGsUbb9N/c8TzE4lHRXl0Hk3fNlSHq0UQiJlWgNTpJvyWvVanjYKVQZ6copwrcr1zZPcfMxDLe45Pd6p0UOsE87anrx9RUPg7CiA7oOa1YiJe7CZdxwVrN2cmEwi0=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>2umPtStYnaV+UKrUitnGPDo2uiOUTGMwpMnEo3QuYJcRSS+x+dYWpw+0nWkQ3kzP2X2y8QI2DSebRqF4BvJcl1mlOAHnIjgYThlpgrP5dYC7re+GbTl68nOSUoKWlk65/KLviDT3JoajFPIu+g/6tzSSn6terLQcZGv21EqbA8U=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIBvTCCASagAwIBAgIQLCY7uKMOl7VFmpH4zzup3DANBgkqhkiG9w0BAQsFADAdMRswGQYDVQQDHhIAaQBQAGgAbwBuAGUAXABNAGUwHhcNMTUwNzMxMTQzMjE3WhcNMTYwNzMwMjAzMjE3WjAdMRswGQYDVQQDHhIAaQBQAGgAbwBuAGUAXABNAGUwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBANrpj7UrWJ2lflCq1IrZxjw6NrojlExjMKTJxKN0LmCXEUkvsfnWFqcPtJ1pEN5Mz9l9svECNg0nm0aheAbyXJdZpTgB5yI4GE4ZaYKz+XWAu63vhm05evJzklKClpZOufyi74g09yaGoxTyLvoP+rc0kp+rXqy0HGRr9tRKmwPFAgMBAAEwDQYJKoZIhvcNAQELBQADgYEActSSZE+Jd8QWQqoJLSY+edmkrWOHp6Bg5qZSEvesH+lRo9hL7wmbeaaLBbc9uq4amM45sFudZx7JHAKsAXxq9uQTyhXiF2CFSIj715gGMan/jcxJdh+0qItNkEqzwY1XCFX26bg5htVlu8NWcEG46Hn2xjt4uKz6Ujx7r/n/wjk=</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
